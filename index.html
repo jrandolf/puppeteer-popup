@@ -1,0 +1,17 @@
+<!--
+  Copyright 2020 The Chromium Authors. All rights reserved.
+  Use of this source code is governed by a BSD-style license that can be
+  found in the LICENSE file.
+-->
+<div>
+  <button id="popup">Open Popup</button>
+</div>
+<script>
+  document.getElementById("popup").addEventListener("click", () => {
+    window.open(
+      "popup.html",
+      "Window Name " + new Date(),
+      "resizable,scrollbars,status,width=200,height=200"
+    );
+  });
+</script>
