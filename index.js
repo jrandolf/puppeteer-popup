@@ -1,15 +1,19 @@
 import puppeteer from "puppeteer";
 (async () => {
-  const browser = await puppeteer.launch({ dumpio: true });
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto("file:///Users/jrandolf/Sources/puppeteer-popup/index.html");
-  const button = await page.waitForSelector("aria/Open Popup");
-  await button?.click();
-  const popupTarget = await browser.waitForTarget((target) =>
-    target.url().endsWith("popup.html")
-  );
-  const popupPage = await popupTarget.page();
-  await popupPage?.bringToFront();
-  await popupPage?.close();
+  const timeout = 30000;
+  page.setDefaultTimeout(timeout);
+
+  {
+      const targetPage = page;
+      await targetPage.setViewport({"width":1158,"height":1227})
+  }
+  {
+    console.log('test');
+      const targetPage = page;
+      await targetPage.goto("https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select");
+  }
+
   await browser.close();
 })();

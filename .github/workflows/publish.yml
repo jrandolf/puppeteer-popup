@@ -1,0 +1,27 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: Install dependencies
+        run: |
+          echo 'test' > test.txt
+      - name: Commit
+        run: |
+          git config --global user.email "55107282+release-please[bot]@users.noreply.github.com"
+          git config --global user.name "release-please[bot]"
+          git add .
+          git commit -m "chore: unfreeze version on docs"
+          git push
